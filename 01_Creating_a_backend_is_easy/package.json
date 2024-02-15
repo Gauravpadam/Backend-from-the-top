@@ -1,0 +1,28 @@
+{
+  "name": "01_creating_a_backend_is_easy",
+  "version": "1.0.0",
+  "description": "A backend using node and express",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gauravpadam/Backend-from-the-top.git"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "server"
+  ],
+  "author": "Gauravpadam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gauravpadam/Backend-from-the-top/issues"
+  },
+  "homepage": "https://github.com/Gauravpadam/Backend-from-the-top#readme",
+  "dependencies": {
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2"
+  }
+}
