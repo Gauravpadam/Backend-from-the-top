@@ -1,8 +1,11 @@
+import { Outlet } from "react-router-dom"
 import Todos from "./components/Todos"
 
 function App() {
   return (
-    <Todos />
+    <main>
+    <Outlet />
+    </main>
   )
 }
 

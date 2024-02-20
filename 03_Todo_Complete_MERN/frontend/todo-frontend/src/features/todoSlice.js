@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  todos: {
-    serial_no: 1,
-    todo: "foobar"
-  }
+  todos: [
+    {
+      serial_no: 1,
+      todo: "foobar"
+    },
+  ]
 }
 
 export const todoSlice = createSlice({
@@ -19,7 +21,7 @@ export const todoSlice = createSlice({
       state.todos.push(todo)
     },
     removeTodo: (state, action) => {
-      state.todos.filter((todo) => todo.serial_no !== action.payload)
+      state.todos = state.todos.filter((todo) => todo.serial_no !== action.payload)
     }
   }
 })

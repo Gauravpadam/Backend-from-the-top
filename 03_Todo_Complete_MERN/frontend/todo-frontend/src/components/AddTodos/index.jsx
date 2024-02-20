@@ -7,9 +7,11 @@ function AddTodos(){
   const [todoText, setTodoText] = useState("")
   const dispatch = useDispatch();
   const serialNumber = useSelector(state => state.todos[todos.length - 1].serial_no + 1)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const submitHandler = () =>{
+  console.log(serialNumber); // (No  output)
+
+  const submitHandler = () => {
     const data = {
       serial_no: serialNumber,
       todo: todoText
