@@ -3,7 +3,12 @@ import cors from "cors";
 import initDb from "./DB/dbInit.js";
 
 const app = express();
-app.use(cors())
+app.use(cors({
+  origin: '*',
+  optionsSuccessStatus: 200
+})) // Cors boiler plate
+
+app.use(express.json()) // magic middleware to parse json data in crud requests
 
 const db = await initDb()
 .then((res) => res)
@@ -13,19 +18,20 @@ const db = await initDb()
 app.get("/", (req, res) => {
   const sql = "SELECT * FROM todos";
 
-  db.query(sq1, (err, data) => {
+  db.query(sql, (err, data) => { // sql typo fixed
     if (err) return res.json(err);
     return res.json(data)
   })
 })
 
 app.post("/makeTodo", (req, res) => {
-  const sql = "INSERT INTO todos VALUES (?)"
+  console.log(req.body);
+  const sql = "INSERT INTO todos (serial_no, todo) VALUES (?, ?)" // query refactored for ease of understanding
   const values = [
     req.body.serial_no,
     req.body.todo
   ]
-  db.query(sql, [values], (err, data) => {
+  db.query(sql, values, (err, data) => { // changed according to query refactor
     if (err) return res.json(`POST REQ :: error: ${err}`);
     return res.json(data)
   })

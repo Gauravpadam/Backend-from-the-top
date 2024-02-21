@@ -6,23 +6,31 @@ import { useNavigate } from "react-router-dom";
 function AddTodos(){
   const [todoText, setTodoText] = useState("")
   const dispatch = useDispatch();
-  const serialNumber = useSelector(state => state.todos[todos.length - 1].serial_no + 1)
+  const serialNumber = useSelector(state => state.todos.length + 1) // todos was not defined; and this logic is correct
   const navigate = useNavigate();
 
   console.log(serialNumber); // (No  output)
 
-  const submitHandler = () => {
+  const submitHandler = async (e) => {
+    e.preventDefault() // To prevent form submission
     const data = {
       serial_no: serialNumber,
       todo: todoText
     }
-    fetch('http://localhost/1414/makeTodo', {
+    await fetch('http://localhost:1414/makeTodo', {
       method: "POST",
+      headers: {
+         "content-type": "application/json", // Note: If you are using a express.json() middleware, pass the content-type property in headers to ensure json parsing else it will render an empty object
+      },
       body: JSON.stringify(data)
     })
     .then((res) => {
-      if (res) dispatch(addTodo(data));
-      navigate("/")
+      if (res.ok){ // ok status received
+        dispatch(addTodo(data))
+      } else {
+        console.log("Some error occured");
+      }
+      navigate('/')
     })
   }
   return(
