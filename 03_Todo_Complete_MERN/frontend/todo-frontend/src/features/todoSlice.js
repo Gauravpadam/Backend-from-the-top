@@ -30,13 +30,21 @@ A function that accepts a Redux action type string and a callback function that 
 
 const initialState = {
 
-    todos: []
+    todos: [
+      {
+        serial_no: 1,
+        todo: "foo"        
+      }
+    ]
 
 }
 export const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
+    initTodos: (state, action) => {
+      state.todos = action.payload
+    },
     addTodo: (state, action) => {
       const todo = {
         serial_no: state.todos.length + 1,
@@ -56,5 +64,5 @@ export const todoSlice = createSlice({
   // }
 })
 
-export const {addTodo, removeTodo} = todoSlice.actions
+export const {initTodos, addTodo, removeTodo} = todoSlice.actions
 export default todoSlice.reducer;
